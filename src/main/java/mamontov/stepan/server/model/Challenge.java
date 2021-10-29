@@ -6,4 +6,5 @@ import lombok.Data;
 public class Challenge {
     private final String prefix;
     private final int complexity;
+    private final HashFunction hashFunction;
 }

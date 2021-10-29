@@ -1,4 +1,4 @@
-package mamontov.stepan.server.model;
+package mamontov.stepan.server.controller.model;
 
 import lombok.Data;
 
