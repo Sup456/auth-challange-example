@@ -100,7 +100,7 @@ public class ChallengeService {
     }
 
     public void addNotAuthenticatedCounter() {
-        failedRequests++;
+        failedRequests = failedRequests + 1;
     }
 
     public void deleteExpiredChallenges() {
@@ -109,8 +109,8 @@ public class ChallengeService {
                 challenges.remove(s);
             }
         });
-        if (failedRequests > 10) {
-            failedRequests = failedRequests - 10;
+        if (failedRequests > limit) {
+            failedRequests = failedRequests - (limit + 1);
         } else {
             failedRequests = 0;
         }
