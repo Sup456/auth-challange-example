@@ -1,6 +1,7 @@
 package mamontov.stepan.server.service;
 
 import mamontov.stepan.server.model.AuthStatus;
+import mamontov.stepan.server.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -12,9 +13,9 @@ import static mamontov.stepan.server.model.AuthStatus.NOT_AUTHORIZED;
 public class AuthService {
     private static final Map<String, String> database = Map.of("username", "password");
 
-    public AuthStatus checkPermission(String username, String password) {
-        var passwordStored = database.get(username);
-        if (!password.equals(passwordStored)) {
+    public AuthStatus checkPermission(User user) {
+        var passwordStored = database.get(user.getUsername());
+        if (!user.getPassword().equals(passwordStored)) {
             return NOT_AUTHORIZED;
         } else {
             return AUTHORIZED;
