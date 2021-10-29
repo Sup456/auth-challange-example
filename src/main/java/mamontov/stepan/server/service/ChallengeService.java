@@ -63,7 +63,7 @@ public class ChallengeService {
             log.info("Prefix={} does not match result={}", prefix, result);
             return Optional.empty();
         }
-        final var internalChallenge = challenges.get(prefix);
+        final var internalChallenge = challenges.remove(prefix);
         if (internalChallenge == null) {
             log.info("No such challenge for prefix={}", prefix);
             return Optional.empty();
