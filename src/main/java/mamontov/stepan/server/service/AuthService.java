@@ -11,7 +11,9 @@ import static mamontov.stepan.server.model.AuthStatus.NOT_AUTHORIZED;
 
 @Service
 public class AuthService {
-    private static final Map<String, String> database = Map.of("username", "password");
+    private static final Map<String, String> database = Map.of("username", "password",
+            "username1", "password1",
+            "username2", "password2");
 
     public AuthStatus checkPermission(User user) {
         var passwordStored = database.get(user.getUsername());

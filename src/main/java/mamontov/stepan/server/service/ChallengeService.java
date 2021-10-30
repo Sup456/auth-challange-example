@@ -46,10 +46,9 @@ public class ChallengeService {
     public Optional<Challenge> challengeIfNeeded(User user) {
         log.info("Check if challenge is needed");
         if (failedRequests >= limit) {
-            log.info("Need to produce a challenge");
             final var prefix = UUID.randomUUID().toString().substring(0, prefixLength);
             final var challenge = new Challenge(prefix, complexity, hashFunction);
-            log.info("Created challenge with prefix={} and complexity={}", prefix, complexity);
+            log.info("Created challenge={}", challenge);
             challenges.put(prefix, new InternalChallenge(user, challenge, LocalDateTime.now().plusSeconds(expiration)));
             return Optional.of(challenge);
         } else {

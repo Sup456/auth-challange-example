@@ -44,6 +44,10 @@ public class UserController {
     public AuthResponse checkChallenge(@RequestBody ChallengeRequest request) {
         return challengeService.isChallengeCompleted(request.getPrefix(), request.getResult())
                 .map(user -> new AuthResponse(authService.checkPermission(user), null))
-                .orElse(new AuthResponse(NOT_AUTHORIZED, null));
+                .or(() -> {
+                    challengeService.addNotAuthenticatedCounter();
+                    return Optional.of(new AuthResponse(NOT_AUTHORIZED, null));
+                })
+                .orElseThrow();
     }
 }
